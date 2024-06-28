@@ -3,9 +3,16 @@ import Link from "next/link";
 import {IconBrandGithub, IconBrandGoogle} from "@tabler/icons-react";
 import {Input} from "@/components/ui/input";
 import {login} from "@/actions/user";
-import {signIn} from "@/auth";
+import {auth, signIn} from "@/auth";
+import {redirect} from "next/navigation";
 
 export default async function Login() {
+    const session = await auth()
+    const user =session?.user;
+
+    if (user){
+        redirect("/")
+    }
     return (
         <>
             <div
