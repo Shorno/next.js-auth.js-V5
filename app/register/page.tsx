@@ -2,8 +2,20 @@ import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import Link from "next/link";
 import {register} from "@/actions/user";
+import {getSession} from "@/lib/getSession";
+import {redirect} from "next/navigation";
 
-export default async function Page() {
+export default async function Register() {
+
+    const session = await getSession();
+
+    const user = session?.user;
+
+    if (user){
+        redirect("/"  )
+    }
+
+
     return (
         <>
             <div

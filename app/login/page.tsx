@@ -5,9 +5,10 @@ import {Input} from "@/components/ui/input";
 import {login} from "@/actions/user";
 import {auth, signIn} from "@/auth";
 import {redirect} from "next/navigation";
+import {getSession} from "@/lib/getSession";
 
 export default async function Login() {
-    const session = await auth()
+    const session = await getSession();
     const user =session?.user;
 
     if (user){

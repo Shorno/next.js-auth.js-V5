@@ -1,8 +1,18 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {getSession} from "@/lib/getSession";
+import {redirect} from "next/navigation";
 
-export default function Dashboard(){
-    return(
+export default async function Dashboard() {
+
+    const session = await getSession();
+    const user = session?.user;
+
+    if (!user) {
+        return redirect("/");
+    }
+
+    return (
         <>
             <div className="flex min-h-screen">
                 <div className="flex-1 bg-gray-100 dark:bg-gray-950">
