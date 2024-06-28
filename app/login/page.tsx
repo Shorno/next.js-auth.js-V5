@@ -3,6 +3,7 @@ import Link from "next/link";
 import {IconBrandGithub, IconBrandGoogle} from "@tabler/icons-react";
 import {Input} from "@/components/ui/input";
 import {login} from "@/actions/user";
+import {signIn} from "@/auth";
 
 export default async function Login() {
     return (
@@ -40,7 +41,12 @@ export default async function Login() {
                     <div
                         className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full"/>
                 </form>
-                <form className={"mb-5"}>
+                <form
+                    action={async ()=>{
+                        "use server"
+                        await signIn("github")
+                    }}
+                    className={"mb-5"}>
                     <button
                         className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-200 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                         type="submit"
