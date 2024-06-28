@@ -1,6 +1,7 @@
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import Link from "next/link";
+import {register} from "@/actions/user";
 
 export default async function Page() {
     return (
@@ -14,7 +15,7 @@ export default async function Page() {
                     Please provide all the necessary information
                 </p>
 
-                <form className="my-8">
+                <form className="my-8" action={register}>
                     <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                         <div className="flex flex-col">
                             <Label htmlFor="firstname" className="mb-2">
