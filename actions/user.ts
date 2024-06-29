@@ -7,6 +7,7 @@ import {hash} from "bcryptjs"
 import {signIn} from "@/auth";
 import {CredentialsSignin} from "next-auth";
 
+
 export const register = async (formData: FormData) => {
     const firstName = formData.get("firstname") as string;
     const lastName = formData.get("lastname") as string;
@@ -48,3 +49,9 @@ export const login = async (formData: FormData) => {
     }
     redirect("/");
 };
+
+
+export const fetchAllUsers = async () => {
+    await connectDB()
+    return User.find({});
+}

@@ -1,4 +1,23 @@
-export default function Settings() {
+import {getSession} from "@/lib/getSession";
+import {redirect} from "next/navigation";
+import {fetchAllUsers} from "@/actions/user";
+
+
+
+export default async function Settings() {
+
+    const session = await getSession();
+    const user = session?.user;
+    if (!user) {
+        return redirect("/login")
+    }
+
+    if (user?.role ! == "admin") {
+        return redirect("/private/dashboard");
+    }
+
+    const allUsers = await fetchAllUsers();
+
     return (
         <>
             <div className="container mx-auto p-4">
@@ -13,7 +32,19 @@ export default function Settings() {
                     </thead>
 
                     <tbody>
-                   {/*Todo*/}
+                    {
+                        allUsers.map((user: any) => (
+                            <tr key={user.id}>
+                                <td className={"p-2"}>{user.firstName}</td>
+                                <td className={"p-2"}>{user.lastName}</td>
+                                <td className={"p-2"}>
+                                    <form action="">
+                                        <button>Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        ))
+                    }
                     </tbody>
                 </table>
             </div>
